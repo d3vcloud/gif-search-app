@@ -1,0 +1,14 @@
+.container-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    /*
+        TODO: mejorar la compatibilidad con otros navegadores
+    */
+}
+
+.container-suggestions > span {
+    margin: 6px;
+    padding: .45em .85em;
+    font-size: .95em;
+    cursor: pointer;
+}
