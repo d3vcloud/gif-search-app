@@ -1,10 +1,16 @@
 import React from 'react'
+import useFetch from '../../hooks/useFetch'
 
 type Props = {
-    term: string
+    term: string,
+    type: 'stickers'|'gifs'
 }
 
-const Result = ({ term }: Props) => {
+const Result = ({ term, type }: Props) => {
+
+    const {data, isLoading} = useFetch(term,type);
+
+    console.log(data);
     return (
         <div>
             

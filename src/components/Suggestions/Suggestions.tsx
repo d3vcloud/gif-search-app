@@ -11,7 +11,7 @@ type Props = {
 
 const Suggestions = ({ term }: Props) => {
     
-    const { data: suggestions } = useFetch(term);
+    const { data: suggestions } = useFetch(term,'suggestions');
 
     console.log('Render <Suggestions />');
     

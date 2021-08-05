@@ -8,7 +8,7 @@ import Suggestions from './Suggestions/Suggestions';
 
 const Home = () => {
 
-    const [category, setCategory] = useState<string>("GIFs");
+    const [category, setCategory] = useState<string>("gifs");
     const [inputSearch, setInputSearch] = useState<string>("");
     const searchRef = useRef<HTMLInputElement>(null);
 
@@ -37,8 +37,8 @@ const Home = () => {
                         title={category}
                         id="input-group-dropdown-1"
                     >
-                        <Dropdown.Item href="#" onClick={() => setCategory("GIFs")}>Gifs</Dropdown.Item>
-                        <Dropdown.Item href="#" onClick={() => setCategory("Stickers")}>Stickers</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => setCategory("gifs")}>Gifs</Dropdown.Item>
+                        <Dropdown.Item href="#" onClick={() => setCategory("stickers")}>Stickers</Dropdown.Item>
                     </DropdownButton>
                     <FormControl 
                         type="text"
@@ -52,7 +52,7 @@ const Home = () => {
                 </InputGroup>               
            </Row>
            <Suggestions term={ inputSearch } />
-           <Result term={ inputSearch }/>
+           <Result term={ inputSearch } type='gifs'/>
        </Container>
     )
 }
