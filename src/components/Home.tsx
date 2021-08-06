@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Container, Dropdown, DropdownButton, FormControl, InputGroup, Row } from 'react-bootstrap'
 import Result from './Result/Result';
-import useNearScreen from '../hooks/useNearScreen';
 
 import './Styles.css';
 import Suggestions from './Suggestions/Suggestions';

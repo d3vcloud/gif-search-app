@@ -4,10 +4,16 @@ const useNearScreen = (distance: string, externalRef: any, once: boolean = true)
 
     const [isNearScreen, setNearScreen] = useState(false);
 
+    //Definiendo el elemento a observar
     const element = externalRef?.current;
-    console.log(element);
+    
     useEffect(() => {
 
+        /**
+         * 
+         * @param entries - son todos los elementos que intersectamos a medidas que nos desplazamos
+         * @param observer - es la instancia del IntersectionObserver
+         */
         const onChange = (entries: any, observer: any) => {
             const el = entries[0];
             if(el.isIntersecting){

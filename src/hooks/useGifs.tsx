@@ -1,16 +1,6 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getGifs } from '../helpers/getData';
 import { QueryFetch } from '../types/typeApp';
-
-/**
- * 
- * @param searchTerm - representa el dato ingresado por el usuario
- * @param type - representa el tipo de busqueda a realizar. Puede ser stickers, sugerencias, gifs
- * @returns 
- */
-
-const INITIAL_PAGE = 0;
 
 /**
  * 
@@ -26,12 +16,12 @@ const useFetch = (searchTerm: string, type: string) => {
         isError: false
     });
 
-    const [page, setPage] = useState(INITIAL_PAGE);
+    const [page, setPage] = useState(0);
     const [loadingNextPage, setLoadingNextPage] = useState(false);
 
     useEffect(() => {
 
-        //Reiniciamos la cantidad a 0
+        //Reiniciamos la cantidad a 0 cuando cambia el termino de busqueda o categoria
         setPage(0);
 
         getGifs(type, searchTerm)
@@ -39,8 +29,8 @@ const useFetch = (searchTerm: string, type: string) => {
 
                 setQuery({
                     data: response,
+                    isError: true,
                     isLoading: false,
-                    isError: false
                 })
 
             })
@@ -58,19 +48,17 @@ const useFetch = (searchTerm: string, type: string) => {
 
         setLoadingNextPage(true);
 
-        if(page === INITIAL_PAGE) return;
+        if(page === 0) return;
 
         getGifs(type, searchTerm,page)
             .then(nextGifs => {
 
                 setLoadingNextPage(false);
-
-                setQuery(prevQuery => {
-                    return {
-                        ...prevQuery,
-                        data: prevQuery.data.concat(nextGifs)//[...prevQuery.data, nextGifs]
-                    }
-                })
+                //prevQuery.data.concat(nextGifs)
+                setQuery(prevQuery => ({
+                    ...prevQuery,
+                    data: [...prevQuery.data, ...nextGifs]
+                }));
                 
             })
 

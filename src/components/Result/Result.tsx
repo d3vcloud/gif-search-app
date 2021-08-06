@@ -1,16 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
 import debounce from "just-debounce-it";
 
-// import { Button } from 'react-bootstrap';
-import Masonry from 'react-masonry-css';
-
 import useFetch from '../../hooks/useGifs'
 import useNearScreen from '../../hooks/useNearScreen';
+
+import Masonry from 'react-masonry-css';
+
 import Gif from '../Gif/Gif';
 
 import './Result.css';
-import { useCallback } from 'react';
+
 
 type Props = {
     term: string,
@@ -26,24 +26,25 @@ const breakpointColumnsObj = {
 
 const Result = ({ term, type }: Props) => {
 
-    const { query, setPage, loadingNextPage } = useFetch(term,type);
+    const { query, setPage } = useFetch(term,type);
     const { data, isLoading } = query;
     const externalRef = useRef<HTMLDivElement>(null);
-    const isNearScreen = useNearScreen('100px',isLoading ? null : externalRef, false);
-    console.log(isNearScreen);
-
-    const handleNextPage = () => setPage(page => page + 1);
+    const isNearScreen = useNearScreen('100px',externalRef, false);
+    
+    // const handleNextPage = () => setPage(page => page + 1);
 
     const debounceHandleNextPage = 
-        useCallback(debounce(() => setPage(page => page + 1), 1000),[]);
+        useCallback(debounce(() => setPage(page => page + 1), 1000),[setPage]);
 
     useEffect(() => {
+        //Evitamos que se llame dos veces a la API
         if(isNearScreen) debounceHandleNextPage();
-    },[isNearScreen,debounceHandleNextPage])
+    },[isNearScreen,debounceHandleNextPage]);
 
     return (
         <>
             <Masonry
+                style={{ minHeight: '100vh'}}
                 breakpointCols={ breakpointColumnsObj }
                 className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column">
