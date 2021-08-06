@@ -1,7 +1,7 @@
 // import { useEffect, useState } from "react"
 import React from "react";
 import { Badge } from "react-bootstrap"
-import useFetch from "../../hooks/useFetch";
+import useSuggestions from "../../hooks/useSuggestions";
 
 import './Suggestions.css';
 
@@ -11,8 +11,8 @@ type Props = {
 
 const Suggestions = ({ term }: Props) => {
     
-    const { data: suggestions } = useFetch(term,'suggestions');
-
+    const { data: suggestions } = useSuggestions(term);
+    
     console.log('Render <Suggestions />');
     
     return (

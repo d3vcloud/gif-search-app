@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Container, Dropdown, DropdownButton, FormControl, InputGroup, Row } from 'react-bootstrap'
 import Result from './Result/Result';
+import useNearScreen from '../hooks/useNearScreen';
 
 import './Styles.css';
 import Suggestions from './Suggestions/Suggestions';
@@ -9,9 +9,9 @@ import Suggestions from './Suggestions/Suggestions';
 const Home = () => {
 
     const [category, setCategory] = useState<string>("gifs");
-    const [inputSearch, setInputSearch] = useState<string>("");
+    const [inputSearch, setInputSearch] = useState<string>('animaciones');
     const searchRef = useRef<HTMLInputElement>(null);
-
+    
     const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
         
         //Capturo el valor de la caja de texto del usuario
@@ -45,7 +45,7 @@ const Home = () => {
                         id="txtTerm"
                         name="txtTerm"
                         className="search-input"
-                        placeholder="Empieza la búsqueda" 
+                        placeholder="Busca un gif o sticker aqui" 
                         ref={ searchRef }
                         onKeyDown={ handleSearch }
                         />
@@ -53,6 +53,7 @@ const Home = () => {
            </Row>
            <Suggestions term={ inputSearch } />
            <Result term={ inputSearch } type='gifs'/>
+           
        </Container>
     )
 }
