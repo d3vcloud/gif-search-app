@@ -7,12 +7,11 @@ type Props = {
 
 const Gif = (gif: Props) => {
     return (
-        <div >
-            <img 
-                style={{ display: 'block', width: '100%', padding: 5/2 }} 
-                src={gif.url} 
-                alt={gif.title} />
-        </div>
+        <img 
+            // loading="lazy"
+            style={{ display: 'block', width: '100%', padding: 5/2 }} 
+            src={gif.url} 
+            alt={gif.title} />
     )
 }
 

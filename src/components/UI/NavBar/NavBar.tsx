@@ -11,7 +11,6 @@ const NavBar = () => {
                     <Nav className="me-auto">
                         <NavLink exact className="nav-link" to="/">Home</NavLink>
                         <NavLink exact className="nav-link" to="/search">Búsqueda</NavLink>
-                        <NavLink exact className="nav-link" to="/history">Historial</NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

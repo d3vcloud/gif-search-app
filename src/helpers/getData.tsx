@@ -1,10 +1,6 @@
+export const getGifs = async (type: string, searchTerm: string, page: number = 0, limit: number = 15) => {
 
-const API_KEY = 'DEAEo7Zfzn5wuErjbs9dJ1D3ECSojzle';
-const PUBLIC_URL = 'https://api.giphy.com/v1';
-
-export const getGifs = async (type: string, searchTerm: string, page: number = 0, limit: number = 5) => {
-
-    const URL = `${PUBLIC_URL}/${type}/search?q=${encodeURIComponent(searchTerm)}&api_key=${API_KEY}&limit=${limit}&offset=${page * limit}`;
+    const URL = `${process.env.REACT_APP_PUBLIC_URL}/${type}/search?q=${encodeURIComponent(searchTerm)}&api_key=${process.env.REACT_APP_API_KEY}&limit=${limit}&offset=${page * limit}`;
     
     const response = await fetch(URL)
     const { data } = await response.json();
@@ -23,7 +19,7 @@ export const getGifs = async (type: string, searchTerm: string, page: number = 0
 }
 
 export const getSuggestions = async (searchTerm: string) => {
-    const URL = `${PUBLIC_URL}/tags/related/${encodeURIComponent(searchTerm)}&?api_key=${API_KEY}`;
+    const URL = `${process.env.REACT_APP_PUBLIC_URL}/tags/related/${encodeURIComponent(searchTerm)}&?api_key=${process.env.REACT_APP_API_KEY}`;
     
     const response = await fetch(URL);
     const { data } = await response.json();

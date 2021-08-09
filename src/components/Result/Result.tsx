@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, Suspense } from 'react';
 
 import debounce from "just-debounce-it";
 
@@ -10,6 +10,7 @@ import Masonry from 'react-masonry-css';
 import Gif from '../Gif/Gif';
 
 import './Result.css';
+import Loading from '../Loading/Loading';
 
 
 type Props = {
@@ -22,17 +23,16 @@ const breakpointColumnsObj = {
     1100: 3,
     700: 2,
     500: 1
-  };
+};
 
 const Result = ({ term, type }: Props) => {
 
-    const { query, setPage } = useFetch(term,type);
+    const { query, setPage, loadingNextPage } = useFetch(term,type);
     const { data, isLoading } = query;
     const externalRef = useRef<HTMLDivElement>(null);
-    const isNearScreen = useNearScreen('100px',externalRef, false);
+    const isNearScreen = useNearScreen('200px',externalRef, false);
     
     // const handleNextPage = () => setPage(page => page + 1);
-
     const debounceHandleNextPage = 
         useCallback(debounce(() => setPage(page => page + 1), 1000),[setPage]);
 
@@ -41,8 +41,9 @@ const Result = ({ term, type }: Props) => {
         if(isNearScreen) debounceHandleNextPage();
     },[isNearScreen,debounceHandleNextPage]);
 
-    return (
-        <>
+    if(isLoading) return <Loading />;
+
+    return <>
             <Masonry
                 style={{ minHeight: '100vh'}}
                 breakpointCols={ breakpointColumnsObj }
@@ -50,19 +51,19 @@ const Result = ({ term, type }: Props) => {
                 columnClassName="my-masonry-grid_column">
                 {
                     data.map(gif => (
-                        <Gif    
-                            key={gif.id}
-                            {...gif}
-                        />
+                        <Suspense key={gif.id} fallback={<div>Cargando imagen...!</div>}>
+                            <Gif {...gif}/>
+                        </Suspense>
                     ))
                 }
             </Masonry>
             <div id='visor' ref={ externalRef }></div>
+            
             {/* <div className="d-grid gap-2">
                 <Button variant="primary" onClick={() => setPage(page => page + 1)}>Go to Next Page</Button>
             </div> */}
         </>
-    )
+    
 }
 
 export default Result

@@ -6,9 +6,10 @@
     */
 }
 
-.container-suggestions > span {
+.container-suggestions span {
     margin: 6px;
     padding: .45em .85em;
     font-size: .95em;
     cursor: pointer;
+    background: #212529;
 }

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Container, Dropdown, DropdownButton, FormControl, InputGroup, Row } from 'react-bootstrap'
+import { useState } from 'react';
+import { Container, Dropdown, DropdownButton, Form, FormControl, InputGroup, Row } from 'react-bootstrap'
 import Result from './Result/Result';
 
 import './Styles.css';
@@ -8,20 +8,13 @@ import Suggestions from './Suggestions/Suggestions';
 const Home = () => {
 
     const [category, setCategory] = useState<string>("gifs");
-    const [inputSearch, setInputSearch] = useState<string>('animaciones');
-    const searchRef = useRef<HTMLInputElement>(null);
-    
-    const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        
-        //Capturo el valor de la caja de texto del usuario
-        const searchTerm = searchRef.current ? searchRef.current.value : '';
-        //Si hay un texto de busqueda, debemos asegurarnos que al menos la cantidad de caracteres sea mayor a 2
-        const isTermValid = searchTerm && searchTerm.trim().length > 2
-        
-        //Si el usuario pulsa ENTER y el TERMINO de busqueda es valido, seteamos el estado
-        if(e.code === 'Enter' && isTermValid) {
-            setInputSearch(searchTerm);
-        }
+    const [inputValue, setInputValue] = useState<string>('');
+    const [termSearch, setTermSearch] = useState<string>('animaciones');
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        setTermSearch(inputValue);
     }
 
     return (
@@ -29,7 +22,7 @@ const Home = () => {
            <Row>
                 {/* Aqui agregaremos un logo animado */}
            </Row>
-           <Row className="mt-5">
+           <Form className="mt-5" onSubmit={ handleSubmit }>
                 <InputGroup className="mb-3">
                     <DropdownButton
                         variant="outline-secondary"
@@ -45,13 +38,17 @@ const Home = () => {
                         name="txtTerm"
                         className="search-input"
                         placeholder="Busca un gif o sticker aqui" 
-                        ref={ searchRef }
-                        onKeyDown={ handleSearch }
+                        autoFocus
+                        value={ inputValue }
+                        onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value) }
                         />
                 </InputGroup>               
-           </Row>
-           <Suggestions term={ inputSearch } />
-           <Result term={ inputSearch } type='gifs'/>
+           </Form>
+           <Suggestions 
+            term={ termSearch }
+            handleInputSearch={ setTermSearch }
+            handleInputValue={ setInputValue } />
+           <Result term={ termSearch } type='gifs'/>
            
        </Container>
     )

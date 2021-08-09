@@ -24,41 +24,58 @@ const useFetch = (searchTerm: string, type: string) => {
         //Reiniciamos la cantidad a 0 cuando cambia el termino de busqueda o categoria
         setPage(0);
 
+        // setQuery({
+        //     data: [],
+        //     isLoading: true,
+        //     isError: false,
+        // });
+
         getGifs(type, searchTerm)
             .then(response => {
 
-                setQuery({
-                    data: response,
-                    isError: true,
-                    isLoading: false,
-                })
+                setTimeout(() => {
+
+                    setQuery({
+                        data: response,
+                        isLoading: false,
+                        isError: false,
+                    })
+
+                },2000);
+                
 
             })
             .catch(err => {
+
                 setQuery({
                     data: [],
                     isLoading: false,
                     isError: true
-                })
+                });
+
+                
             })
 
     }, [searchTerm, type]);
 
     useEffect(() => {
 
-        setLoadingNextPage(true);
-
         if(page === 0) return;
+
+        setLoadingNextPage(true);
 
         getGifs(type, searchTerm,page)
             .then(nextGifs => {
 
                 setLoadingNextPage(false);
                 //prevQuery.data.concat(nextGifs)
-                setQuery(prevQuery => ({
-                    ...prevQuery,
-                    data: [...prevQuery.data, ...nextGifs]
-                }));
+                
+                setTimeout(() => {
+                    setQuery(prevQuery => ({
+                        ...prevQuery,
+                        data: [...prevQuery.data, ...nextGifs]
+                    }));
+                },2000);
                 
             })
 
