@@ -33,15 +33,11 @@ const useFetch = (searchTerm: string, type: string) => {
         getGifs(type, searchTerm)
             .then(response => {
 
-                setTimeout(() => {
-
-                    setQuery({
-                        data: response,
-                        isLoading: false,
-                        isError: false,
-                    })
-
-                },2000);
+                setQuery({
+                    data: response,
+                    isLoading: false,
+                    isError: false,
+                })
                 
 
             })
@@ -70,12 +66,10 @@ const useFetch = (searchTerm: string, type: string) => {
                 setLoadingNextPage(false);
                 //prevQuery.data.concat(nextGifs)
                 
-                setTimeout(() => {
-                    setQuery(prevQuery => ({
-                        ...prevQuery,
-                        data: [...prevQuery.data, ...nextGifs]
-                    }));
-                },2000);
+                setQuery(prevQuery => ({
+                    ...prevQuery,
+                    data: [...prevQuery.data, ...nextGifs]
+                }));
                 
             })
 
