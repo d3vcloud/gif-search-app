@@ -11,7 +11,6 @@ import Gif from '../Gif/Gif';
 
 import './Result.css';
 import Loading from '../Loading/Loading';
-import Loader from '../Loader/Loader';
 
 type Props = {
     term: string,
@@ -51,7 +50,7 @@ const Result = ({ term, type }: Props) => {
                 columnClassName="my-masonry-grid_column">
                 {
                     data.map(gif => (
-                        <Suspense key={gif.id} fallback={<Loader />}>
+                        <Suspense key={gif.id} fallback={<div style={{ width: `${gif.width}px`, height: `${gif.height}px` }} >Cargando</div>}>
                             <Gif {...gif}/>
                         </Suspense>
                     ))

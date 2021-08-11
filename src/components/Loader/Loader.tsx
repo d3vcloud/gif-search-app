@@ -1,13 +1,22 @@
 // import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const Loader = () => {
+type Props = {
+    width: number,
+    height: number
+}
+
+const Loader = ({ width, height}: Props) => {
+    
+    const viewBox = `0 0 ${width} ${height}`;
+    
+    console.log(width, height, viewBox);
     return (
         <ContentLoader 
             speed={2}
-            width={380}
-            height={460}
-            viewBox="0 0 380 460"
+            width={width}
+            height={height}
+            viewBox={viewBox}
             backgroundColor="#f3f3f3"
             foregroundColor="#ecebeb"
 

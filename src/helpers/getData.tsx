@@ -11,7 +11,9 @@ export const getGifs = async (type: string, searchTerm: string, page: number = 0
         return {
             id,
             title,
-            url: downsized_medium.url
+            url: downsized_medium.url,
+            height: downsized_medium.height,
+            width: downsized_medium.width
         }
     });
 
