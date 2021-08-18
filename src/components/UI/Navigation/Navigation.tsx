@@ -5,8 +5,9 @@ import {
   } from 'react-router-dom';
 
 import NotFound from '../../Errors/NotFound';
-import Home from '../../Home';
 import NavBar from '../NavBar/NavBar';
+
+import Home from '../../Home';
 
 const Navigation = () => {
     return (

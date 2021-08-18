@@ -5,10 +5,9 @@ import { QueryFetch } from '../types/typeApp';
 /**
  * 
  * @param searchTerm - Representa palabra o frase a buscar
- * @param type - Representa el tipo de busqueda: stickers o gifs
  * @returns 
  */
-const useFetch = (searchTerm: string, type: string) => {
+const useFetch = (searchTerm: string) => {
 
     const [query, setQuery] = useState<QueryFetch>({
         data: [],
@@ -30,7 +29,7 @@ const useFetch = (searchTerm: string, type: string) => {
         //     isError: false,
         // });
 
-        getGifs(type, searchTerm)
+        getGifs(searchTerm)
             .then(response => {
 
                 setQuery({
@@ -52,7 +51,7 @@ const useFetch = (searchTerm: string, type: string) => {
                 
             })
 
-    }, [searchTerm, type]);
+    }, [searchTerm]);
 
     useEffect(() => {
 
@@ -60,12 +59,11 @@ const useFetch = (searchTerm: string, type: string) => {
 
         setLoadingNextPage(true);
 
-        getGifs(type, searchTerm,page)
+        getGifs(searchTerm,page)
             .then(nextGifs => {
 
                 setLoadingNextPage(false);
-                //prevQuery.data.concat(nextGifs)
-                
+     
                 setQuery(prevQuery => ({
                     ...prevQuery,
                     data: [...prevQuery.data, ...nextGifs]
@@ -73,7 +71,7 @@ const useFetch = (searchTerm: string, type: string) => {
                 
             })
 
-    }, [page, searchTerm, type]);
+    }, [page, searchTerm]);
 
     return {
         query,

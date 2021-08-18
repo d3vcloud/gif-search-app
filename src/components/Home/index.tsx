@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Container, Dropdown, DropdownButton, Form, FormControl, InputGroup, Row } from 'react-bootstrap'
-import Result from './Result/Result';
 
-import './Styles.css';
-import Suggestions from './Suggestions/Suggestions';
+import { Container, Form, FormControl, InputGroup } from 'react-bootstrap'
+
+import Suggestions from '../Suggestions/Suggestions';
+import Result from '../Result/Result';
+
+import './Home.css';
 
 const Home = () => {
 
-    const [category, setCategory] = useState<string>("gifs");
     const [inputValue, setInputValue] = useState<string>('');
     const [termSearch, setTermSearch] = useState<string>('animaciones');
 
@@ -19,25 +20,15 @@ const Home = () => {
 
     return (
        <Container>
-           <Row>
-                {/* Aqui agregaremos un logo animado */}
-           </Row>
            <Form className="mt-5" onSubmit={ handleSubmit }>
                 <InputGroup className="mb-3">
-                    <DropdownButton
-                        variant="outline-secondary"
-                        title={category}
-                        id="input-group-dropdown-1"
-                    >
-                        <Dropdown.Item href="#" onClick={() => setCategory("gifs")}>Gifs</Dropdown.Item>
-                        <Dropdown.Item href="#" onClick={() => setCategory("stickers")}>Stickers</Dropdown.Item>
-                    </DropdownButton>
+                <InputGroup.Text className='group-text'>Buscador</InputGroup.Text>
                     <FormControl 
                         type="text"
                         id="txtTerm"
                         name="txtTerm"
                         className="search-input"
-                        placeholder="Busca un gif o sticker aqui" 
+                        placeholder="Busca un gif pulsando ENTER" 
                         autoFocus
                         value={ inputValue }
                         onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value) }
@@ -48,10 +39,10 @@ const Home = () => {
             term={ termSearch }
             handleInputSearch={ setTermSearch }
             handleInputValue={ setInputValue } />
-           <Result term={ termSearch } type='gifs'/>
+           <Result term={ termSearch }/>
            
        </Container>
     )
 }
 
-export default Home
+export default Home;

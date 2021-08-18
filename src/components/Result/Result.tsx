@@ -1,21 +1,20 @@
-import { useEffect, useRef, useCallback, Suspense } from 'react';
+import React, { useEffect, useRef, useCallback, Suspense } from 'react';
 
-import debounce from "just-debounce-it";
+import Masonry from 'react-masonry-css';
+import debounce from 'just-debounce-it';
 
 import useFetch from '../../hooks/useGifs'
 import useNearScreen from '../../hooks/useNearScreen';
 
-import Masonry from 'react-masonry-css';
+import Loading from '../Loading/Loading';
+import Loader from '../Loader/Loader';
 
 import Gif from '../Gif/Gif';
 
 import './Result.css';
-import Loading from '../Loading/Loading';
-import Loader from '../Loader/Loader';
 
 type Props = {
     term: string,
-    type: 'stickers'|'gifs'
 }
 
 const breakpointColumnsObj = {
@@ -25,14 +24,13 @@ const breakpointColumnsObj = {
     500: 1
 };
 
-const Result = ({ term, type }: Props) => {
+const Result: React.FC<Props> = ({ term }) => {
 
-    const { query, setPage } = useFetch(term,type);
+    const { query, setPage } = useFetch(term);
     const { data, isLoading } = query;
     const externalRef = useRef<HTMLDivElement>(null);
     const isNearScreen = useNearScreen('100px',externalRef, false);
     
-    // const handleNextPage = () => setPage(page => page + 1);
     const debounceHandleNextPage = 
         useCallback(debounce(() => setPage(page => page + 1), 1000),[setPage]);
 
@@ -44,26 +42,22 @@ const Result = ({ term, type }: Props) => {
     if(isLoading) return <Loading />;
 
     return <>
-            <Masonry
-                style={{ minHeight: '100vh'}}
-                breakpointCols={ breakpointColumnsObj }
-                className="my-masonry-grid"
-                columnClassName="my-masonry-grid_column">
-                {
-                    data.map(gif => (
-                        <Suspense key={gif.id} fallback={<Loader />}>
-                            <Gif {...gif}/>
-                        </Suspense>
-                    ))
-                }
-            </Masonry>
-            <div id='visor' ref={ externalRef }></div>
-            
-            {/* <div className="d-grid gap-2">
-                <Button variant="primary" onClick={() => setPage(page => page + 1)}>Go to Next Page</Button>
-            </div> */}
-        </>
+                <Masonry
+                    style={{ minHeight: '100vh'}}
+                    breakpointCols={ breakpointColumnsObj }
+                    className='my-masonry-grid'
+                    columnClassName='my-masonry-grid_column'>
+                    {
+                        data.map(gif => (
+                            <Suspense key={gif.id} fallback={<Loader />}>
+                                <Gif {...gif}/>
+                            </Suspense>
+                        ))
+                    }
+                </Masonry>
+                <div id='visor' ref={ externalRef }></div>
+            </>
     
 }
 
-export default Result
+export default Result;

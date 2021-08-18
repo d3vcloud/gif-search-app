@@ -1,10 +1,11 @@
-body {
+/* body {
     transition: .3s ease all;
 }
-
-body.dark {
+*/
+.dark {
     background: #303846;
-}
+    transition: .3s ease all;
+} 
 
 .switch {
     background: #343D5B;

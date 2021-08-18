@@ -1,0 +1,12 @@
+h1, h5 {
+    color: #fff;
+}
+
+.container-error {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
+}
