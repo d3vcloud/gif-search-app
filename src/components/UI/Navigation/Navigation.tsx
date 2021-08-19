@@ -4,10 +4,10 @@ import {
     Route
   } from 'react-router-dom';
 
-import NotFound from '../../Errors/NotFound';
+import NotFound from '../../../pages/Errors/NotFound';
 import NavBar from '../NavBar/NavBar';
 
-import Home from '../../Home';
+import Home from '../../../pages/Home';
 
 const Navigation = () => {
     return (

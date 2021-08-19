@@ -9,7 +9,7 @@ import useNearScreen from '../../hooks/useNearScreen';
 import Loading from '../Loading/Loading';
 import Loader from '../Loader/Loader';
 
-import Gif from '../Gif/Gif';
+import Gif from '../Gif';
 
 import './Result.css';
 

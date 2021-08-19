@@ -1,11 +1,11 @@
+import { useContext } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
-import './ThemeSetter.css';
-import { useContext } from 'react';
 import ThemeContext from '../../Contexts/ThemeContext';
-//#303846 = creat-react-app
-//#212529 = navbar - combo
+
+import './ThemeSetter.css';
 
 const ThemeSetter = () => {
 

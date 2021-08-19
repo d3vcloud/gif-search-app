@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { Container, Form, FormControl, InputGroup } from 'react-bootstrap'
 
-import Suggestions from '../Suggestions/Suggestions';
-import Result from '../Result/Result';
+import Suggestions from '../../components/Suggestions/Suggestions';
+import Result from '../../components/Result/Result';
 
 import './Home.css';
 
@@ -30,6 +30,7 @@ const Home = () => {
                         className="search-input"
                         placeholder="Busca un gif pulsando ENTER" 
                         autoFocus
+                        autoComplete="off"
                         value={ inputValue }
                         onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value) }
                         />

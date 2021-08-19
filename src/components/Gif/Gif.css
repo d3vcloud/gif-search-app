@@ -1,0 +1,38 @@
+.gif {
+    /* border-radius: 10px; */
+    cursor: pointer;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.gif:hover .hide{
+    display: block;
+}
+
+/* .image > img {
+    display: block; 
+    padding: 5/2;
+    width: '100%'; 
+} */
+
+.image {
+    max-width: 100%; 
+    display: block;
+    height: auto;
+    transform: scale(1);
+    transition: all 0.9s;
+    width: 100%;
+}
+
+.image:hover img {
+    transform: scale(1.1);
+}
+
+.hide {
+    display: none;
+}
+
+.gif-options {
+    position: absolute;
+    z-index: 1;
+}

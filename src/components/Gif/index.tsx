@@ -1,4 +1,7 @@
-import React from "react";
+import React from 'react';
+import Options from '../Options';
+
+import './Gif.css';
 
 type Props = {
     id: number,
@@ -42,11 +45,18 @@ const Gif = (gif: Props) => {
     imgCache.read(gif.url);
 
     return (
-        <img 
-            style={{ display: 'block', width: '100%', padding: 5/2 }} 
-            src={gif.url} 
-            alt={gif.title} />
+        <div className='gif'>
+          <div className='gif-options hide'>
+            <Options />
+          </div>
+          <div className="image">
+            <img 
+              style={{ display: 'block', width: '100%', padding: 5/2 }} 
+              src={gif.url} 
+              alt={gif.title} />
+          </div>
+        </div>
     )
 }
 
-export default React.memo(Gif)
+export default React.memo(Gif);
