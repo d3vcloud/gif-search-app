@@ -47,6 +47,7 @@ const Gif = (gif: Props) => {
     return (
         <div className='gif'>
           <div className='gif-options hide'>
+            {/* TODO: Ocultar componente cuando usuario saca el mouse del contenedor */}
             <Options />
           </div>
           <div className="image">
