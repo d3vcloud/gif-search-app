@@ -1,4 +1,8 @@
-export const getGifs = async (searchTerm: string, page: number = 0, limit: number = 15) => {
+export const getGifs = async (
+        searchTerm: string, 
+        page: number = 0, 
+        limit: number = 15
+) => {
 
     const URL = `${process.env.REACT_APP_PUBLIC_URL}/gifs/search?q=${encodeURIComponent(searchTerm)}&api_key=${process.env.REACT_APP_API_KEY}&limit=${limit}&offset=${page * limit}`;
     

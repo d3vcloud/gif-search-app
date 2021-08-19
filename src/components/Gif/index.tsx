@@ -1,12 +1,14 @@
 import React from 'react';
+
 import Options from '../Options';
 
 import './Gif.css';
 
 type Props = {
-    id: number,
-    title: string,
-    url: string
+    id: number;
+    title: string;
+    url: string;
+    setIsVisible: (state: boolean) => void;
 }
 
 type Cache = {
@@ -40,23 +42,28 @@ const imgCache: ImgCache = {
     }
 };
 
-const Gif = (gif: Props) => {
+const Gif: React.FC<Props> = ({id, url, title, setIsVisible}) => {
   
-    imgCache.read(gif.url);
+    imgCache.read(url);
+
+    const newUrl = `https://media.giphy.com/media/${ id }/giphy.gif`;
 
     return (
+      <>
         <div className='gif'>
-          <div className='gif-options hide'>
-            {/* TODO: Ocultar componente cuando usuario saca el mouse del contenedor */}
-            <Options />
+            <div className='gif-options hide'>
+              {/* TODO: Ocultar componente cuando usuario saca el mouse del contenedor */}
+              <Options url={newUrl} setIsVisible={setIsVisible}/>
+            </div>
+            <div className="image">
+              <img 
+                style={{ display: 'block', width: '100%', padding: 5/2 }} 
+                src={url} 
+                alt={title} />
+            </div>
           </div>
-          <div className="image">
-            <img 
-              style={{ display: 'block', width: '100%', padding: 5/2 }} 
-              src={gif.url} 
-              alt={gif.title} />
-          </div>
-        </div>
+      </>
+        
     )
 }
 

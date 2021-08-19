@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, Suspense } from 'react';
+import React, { useEffect, useRef, useCallback, Suspense, useState } from 'react';
 
 import Masonry from 'react-masonry-css';
 import debounce from 'just-debounce-it';
@@ -12,6 +12,7 @@ import Loader from '../Loader/Loader';
 import Gif from '../Gif';
 
 import './Result.css';
+import FlashMessage from '../FlashMessage';
 
 type Props = {
     term: string,
@@ -26,6 +27,8 @@ const breakpointColumnsObj = {
 
 const Result: React.FC<Props> = ({ term }) => {
 
+    const [isVisible, setIsVisible] = useState(false);
+    
     const { query, setPage } = useFetch(term);
     const { data, isLoading } = query;
     const externalRef = useRef<HTMLDivElement>(null);
@@ -42,6 +45,7 @@ const Result: React.FC<Props> = ({ term }) => {
     if(isLoading) return <Loading />;
 
     return <>
+                {isVisible && <FlashMessage message="Enlace copiado!"/>}
                 <Masonry
                     style={{ minHeight: '100vh'}}
                     breakpointCols={ breakpointColumnsObj }
@@ -50,7 +54,7 @@ const Result: React.FC<Props> = ({ term }) => {
                     {
                         data.map(gif => (
                             <Suspense key={gif.id} fallback={<Loader />}>
-                                <Gif {...gif}/>
+                                <Gif {...gif} setIsVisible={setIsVisible}/>
                             </Suspense>
                         ))
                     }

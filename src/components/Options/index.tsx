@@ -1,12 +1,39 @@
+import React from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faLink } from '@fortawesome/free-solid-svg-icons';
 
+import { copyTextToClipboard } from '../../helpers/copyClipboard';
+
 import "./Options.css";
 
-const Options = () => {
+type Props = {
+  url: string,
+  setIsVisible: (state:boolean) => void
+}
+
+const Options: React.FC<Props> = ({url, setIsVisible}) => {
+
+  const handleCopyClick = () => {
+    copyTextToClipboard(url)
+      .then(() => {
+        //Show flashMessage container
+        setIsVisible(true);
+
+        //Hide flashMessage container
+        setTimeout(() => {
+          setIsVisible(false)
+        },4000);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   return (
     <>
-      <button className='option'>
+      
+      <button className='option' onClick={handleCopyClick}>
         <span aria-label='copy link of gif to clipboard' role='img'>
             <FontAwesomeIcon icon={faLink} />
         </span>
