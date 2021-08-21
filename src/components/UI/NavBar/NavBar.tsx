@@ -1,5 +1,5 @@
-import { Navbar, Container } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { Navbar, Container, Nav } from 'react-bootstrap'
+import { Link, NavLink } from 'react-router-dom';
 import ThemeSetter from '../ThemeSetter';
 
 const NavBar = () => {
@@ -8,13 +8,15 @@ const NavBar = () => {
         <Navbar bg='dark' variant='dark' expand='lg'>
             <Container>
                 <Link className='navbar-brand' to='/'>GIFAPP</Link>
-                {/* <Navbar.Brand href='/'>GIFAPP</Navbar.Brand> */}
                 <Navbar.Toggle aria-controls='responsive-navbar-nav' />
                 <Navbar.Collapse>
+                    <Nav className="me-auto">
+                        <NavLink className='nav-link' to="/">Home</NavLink>
+                        <NavLink className='nav-link' to="/favorites">Favoritos</NavLink>
+                    </Nav>
                     <ThemeSetter />
                 </Navbar.Collapse>
             </Container>
-            
         </Navbar>
     )
 }

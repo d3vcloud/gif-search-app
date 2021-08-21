@@ -10,3 +10,8 @@ export type Theme = {
     isThemeDark: boolean;
     handleChangeTheme: () => void;
 }
+
+export type ActionReducer = {
+    payload: any;
+    type: 'ADD' | 'REMOVE'
+}

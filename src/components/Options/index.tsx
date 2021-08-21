@@ -30,6 +30,10 @@ const Options: React.FC<Props> = ({url, setIsVisible}) => {
       })
   }
 
+  const handleAddToFavorites = () => {
+    
+  }
+
   return (
     <>
       
