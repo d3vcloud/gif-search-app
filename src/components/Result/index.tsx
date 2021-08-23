@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, Suspense, useState } from 'react';
+import React, { useEffect, useRef, useCallback, Suspense, useState, useReducer } from 'react';
 
 import Masonry from 'react-masonry-css';
 import debounce from 'just-debounce-it';
@@ -11,8 +11,11 @@ import Loader from '../Loader/Loader';
 
 import Gif from '../Gif';
 
-import './Result.css';
 import FlashMessage from '../FlashMessage';
+import favoriteReducer from '../../reducers/favoriteReducer';
+import { GifData } from '../../types/typeApp';
+
+import './Result.css';
 
 type Props = {
     term: string,
@@ -25,6 +28,13 @@ const breakpointColumnsObj = {
     500: 1
 };
 
+const init = () => {
+
+    const favorites = localStorage.getItem('favorites');
+
+    return favorites !== null ? JSON.parse(favorites): [];
+}
+
 const Result: React.FC<Props> = ({ term }) => {
 
     const [isVisible, setIsVisible] = useState(false);
@@ -33,6 +43,8 @@ const Result: React.FC<Props> = ({ term }) => {
     const { data, isLoading } = query;
     const externalRef = useRef<HTMLDivElement>(null);
     const isNearScreen = useNearScreen('100px',externalRef, false);
+
+    const [favorites, dispatch] = useReducer(favoriteReducer,[],init);
     
     const debounceHandleNextPage = 
         useCallback(debounce(() => setPage(page => page + 1), 1000),[setPage]);
@@ -41,6 +53,26 @@ const Result: React.FC<Props> = ({ term }) => {
         //Evitamos que se llame dos veces a la API
         if(isNearScreen) debounceHandleNextPage();
     },[isNearScreen,debounceHandleNextPage]);
+
+    useEffect(() => {
+        localStorage.setItem('favorites',JSON.stringify(favorites));
+    },[favorites]);
+
+    const addToFavorites = (gif: GifData) => {
+        
+        dispatch({
+            payload: gif,
+            type: 'ADD'
+        });
+    }
+
+    // const removeToFavorites = (id: number) => {
+        
+    //     dispatch({
+    //         payload: id,
+    //         type: 'REMOVE'
+    //     });
+    // }
 
     if(isLoading) return <Loading />;
 
@@ -54,7 +86,11 @@ const Result: React.FC<Props> = ({ term }) => {
                     {
                         data.map(gif => (
                             <Suspense key={gif.id} fallback={<Loader />}>
-                                <Gif {...gif} setIsVisible={setIsVisible}/>
+                                <Gif 
+                                    gif={gif}
+                                    setIsVisible={setIsVisible}
+                                    addToFavorites={addToFavorites}
+                                />
                             </Suspense>
                         ))
                     }

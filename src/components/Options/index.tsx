@@ -6,13 +6,16 @@ import { faHeart, faLink } from '@fortawesome/free-solid-svg-icons';
 import { copyTextToClipboard } from '../../helpers/copyClipboard';
 
 import "./Options.css";
+import { GifData } from '../../types/typeApp';
 
 type Props = {
-  url: string,
-  setIsVisible: (state:boolean) => void
+  gif: GifData;
+  url: string;
+  setIsVisible: (state:boolean) => void;
+  addToFavorites: (gif: GifData) => void;
 }
 
-const Options: React.FC<Props> = ({url, setIsVisible}) => {
+const Options: React.FC<Props> = ({gif ,url, setIsVisible, addToFavorites}) => {
 
   const handleCopyClick = () => {
     copyTextToClipboard(url)
@@ -30,10 +33,6 @@ const Options: React.FC<Props> = ({url, setIsVisible}) => {
       })
   }
 
-  const handleAddToFavorites = () => {
-    
-  }
-
   return (
     <>
       
@@ -42,7 +41,7 @@ const Options: React.FC<Props> = ({url, setIsVisible}) => {
             <FontAwesomeIcon icon={faLink} />
         </span>
       </button>
-      <button className='option'>
+      <button className='option' onClick={() => addToFavorites(gif)}>
         <span aria-label='add gif to favorites' role='img'>
             <FontAwesomeIcon icon={faHeart} />
         </span>

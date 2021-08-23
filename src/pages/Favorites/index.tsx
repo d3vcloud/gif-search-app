@@ -1,9 +1,29 @@
+import { useState,useEffect } from 'react';
+import { GifData } from "../../types/typeApp";
 
 
 const Favorites: React.FC = () => {
+
+    const [favorites, setFavorites] = useState<GifData[]>();
+
+    useEffect(() => {
+        const favorites = localStorage.getItem('favorites') || '';
+
+        setFavorites(JSON.parse(favorites));
+    },[]);
+
     return (
         <div style={{ height:'100vh' }}>
-            Estas en la pagina de favoritos            
+            {
+                favorites &&  
+                    <ul>
+                        {
+                            favorites.map(favorite => (
+                                <li key={favorite.id}>{favorite.title}</li>
+                            ))
+                        }
+                    </ul>
+            }          
         </div>
     )
 }

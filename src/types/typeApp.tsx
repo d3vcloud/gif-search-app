@@ -15,3 +15,15 @@ export type ActionReducer = {
     payload: any;
     type: 'ADD' | 'REMOVE'
 }
+
+export type GifData = {
+    id:number;
+    title:string;
+    url:string;
+    width: number;
+    height: number;
+}
+
+// export type FavoriteReducer = {
+//     dispatch: (state: GifData[], action: ActionReducer) => GifData[]
+// }

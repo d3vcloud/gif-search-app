@@ -1,14 +1,14 @@
 import React from 'react';
+import { GifData } from '../../types/typeApp';
 
 import Options from '../Options';
 
 import './Gif.css';
 
 type Props = {
-    id: number;
-    title: string;
-    url: string;
+    gif: GifData;
     setIsVisible: (state: boolean) => void;
+    addToFavorites: (gif: GifData) => void;
 }
 
 type Cache = {
@@ -42,18 +42,23 @@ const imgCache: ImgCache = {
     }
 };
 
-const Gif: React.FC<Props> = ({id, url, title, setIsVisible}) => {
+const Gif: React.FC<Props> = ({gif, setIsVisible, addToFavorites}) => {
   
-    imgCache.read(url);
-
+    const { id, url, title } = gif;
     const newUrl = `https://media.giphy.com/media/${ id }/giphy.gif`;
+    imgCache.read(url);
 
     return (
       <>
         <div className='gif'>
             <div className='gif-options hide'>
-              {/* TODO: Ocultar componente cuando usuario saca el mouse del contenedor */}
-              <Options url={newUrl} setIsVisible={setIsVisible}/>
+              {/* TODO: Ocultar componente Options cuando usuario saca el mouse del contenedor */}
+              <Options
+                gif={gif} 
+                url={newUrl} 
+                setIsVisible={setIsVisible}
+                addToFavorites={addToFavorites}
+              />
             </div>
             <div className="image">
               <img 

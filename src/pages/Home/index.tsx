@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
-import { Container, Form, FormControl, InputGroup } from 'react-bootstrap'
+import Container from 'react-bootstrap/Container';
 
-import Suggestions from '../../components/Suggestions/Suggestions';
-import Result from '../../components/Result/Result';
+import SearchForm from '../../components/SearchForm';
+import Suggestions from '../../components/Suggestions';
+import Result from '../../components/Result';
 
-import './Home.css';
+// import './Home.css';
 
 const Home = () => {
 
@@ -20,28 +21,16 @@ const Home = () => {
 
     return (
        <Container>
-           <Form className="mt-5" onSubmit={ handleSubmit }>
-                <InputGroup className="mb-3">
-                <InputGroup.Text className='group-text'>Buscador</InputGroup.Text>
-                    <FormControl 
-                        type="text"
-                        id="txtTerm"
-                        name="txtTerm"
-                        className="search-input"
-                        placeholder="Busca un gif pulsando ENTER" 
-                        autoFocus
-                        autoComplete="off"
-                        value={ inputValue }
-                        onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value) }
-                        />
-                </InputGroup>               
-           </Form>
+           <SearchForm 
+            handleSubmit={handleSubmit}
+            setInputValue={setInputValue}
+            inputValue={inputValue}
+            />
            <Suggestions 
             term={ termSearch }
             handleInputSearch={ setTermSearch }
             handleInputValue={ setInputValue } />
            <Result term={ termSearch }/>
-           
        </Container>
     )
 }
