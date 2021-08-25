@@ -24,6 +24,7 @@ export type GifData = {
     height: number;
 }
 
+
 // export type FavoriteReducer = {
 //     dispatch: (state: GifData[], action: ActionReducer) => GifData[]
 // }

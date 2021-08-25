@@ -1,37 +1,29 @@
-import { useState,useEffect } from 'react';
-import { GifData } from "../../types/typeApp";
+import { useContext } from 'react';
+
+import { Container } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
+
+import FavoriteContext from '../../components/Contexts/FavoriteContext';
+import Result from '../../components/Result';
 
 
 
 const Favorites: React.FC = () => {
 
-    const [favorites, setFavorites] = useState<GifData[]>();
+    const location = useLocation();
 
-    useEffect(() => {
-        const favorites = localStorage.getItem('favorites') || '';
-
-        setFavorites(JSON.parse(favorites));
-    },[]);
+    const { favorites } = useContext(FavoriteContext);
 
     return (
-        <div style={{ height:'100vh' }}>
+        <Container style={{ minHeight: '100vh'}}>
             {
-                favorites &&  
-                    <ul>
-                        {
-                            favorites.map(favorite => (
-                                <li key={favorite.id}>{favorite.title}</li>
-                            ))
-                        }
-                    </ul>
-                    // <Result 
-                    //     data={ favorites }
-                    //     setPage={ setPage }
-                    //     isLoading={ isLoading }
-                    //     status='FAVORITE'/>
-                    
+                favorites &&   
+                    <Result 
+                        data={ favorites }
+                        setPage={ () => {} }
+                        pathname={ location.pathname }/>       
             }          
-        </div>
+        </Container>
     )
 }
 

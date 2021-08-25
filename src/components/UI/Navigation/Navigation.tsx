@@ -11,6 +11,7 @@ import Home from '../../../pages/Home';
 import Favorites from '../../../pages/Favorites';
 
 const Navigation = () => {
+    
     return (
         <>
             <Router>

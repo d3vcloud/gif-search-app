@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import ThemeSetter from '../ThemeSetter';
 
 const NavBar = () => {
-
+    
     return (
         <Navbar bg='dark' variant='dark' expand='lg'>
             <Container>

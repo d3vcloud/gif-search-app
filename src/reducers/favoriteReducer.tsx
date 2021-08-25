@@ -15,8 +15,8 @@ const favoriteReducer = (state: GifData[], action: ActionReducer) : GifData[]=> 
             return state;
         
         case 'REMOVE':
-            return state;
-            
+            //Devolvemos todos los gifs que sean diferentes del gif con ID enviado
+            return state.filter(gif => gif.id !== action.payload.id);
         default:
             return state;
     }

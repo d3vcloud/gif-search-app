@@ -9,7 +9,6 @@ type Props = {
     gif: GifData;
     setIsVisible: (state: boolean) => void;
     actionFavorite: (gif: GifData) => void;
-    // removeToFavorites?: (id: number) => void;
 }
 
 type Cache = {
@@ -43,7 +42,7 @@ const imgCache: ImgCache = {
     }
 };
 
-const Gif: React.FC<Props> = ({gif, setIsVisible, actionFavorite}) => {
+const Gif: React.FC<Props> = ({gif, setIsVisible, actionFavorite }) => {
   
     const { id, url, title } = gif;
     const newUrl = `https://media.giphy.com/media/${ id }/giphy.gif`;
@@ -55,10 +54,10 @@ const Gif: React.FC<Props> = ({gif, setIsVisible, actionFavorite}) => {
             <div className='gif-options hide'>
               {/* TODO: Ocultar componente Options cuando usuario saca el mouse del contenedor */}
               <Options
-                gif={gif} 
-                url={newUrl} 
-                setIsVisible={setIsVisible}
-                actionFavorite={actionFavorite}
+                gif={ gif } 
+                url={ newUrl } 
+                setIsVisible={ setIsVisible }
+                actionFavorite={ actionFavorite }
               />
             </div>
             <div className="image">
