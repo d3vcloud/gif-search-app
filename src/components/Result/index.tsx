@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useCallback, Suspense, useState, useReducer }
 import Masonry from 'react-masonry-css';
 import debounce from 'just-debounce-it';
 
-import useFetch from '../../hooks/useGifs'
 import useNearScreen from '../../hooks/useNearScreen';
 
 import Loading from '../Loading/Loading';
@@ -18,7 +17,10 @@ import { GifData } from '../../types/typeApp';
 import './Result.css';
 
 type Props = {
-    term: string,
+    data: any;
+    setPage:(page: any) => void;
+    isLoading: boolean;
+    status: 'FAVORITE' | 'HOME';
 }
 
 const breakpointColumnsObj = {
@@ -35,20 +37,22 @@ const init = () => {
     return favorites !== null ? JSON.parse(favorites): [];
 }
 
-const Result: React.FC<Props> = ({ term }) => {
+const Result: React.FC<Props> = ({ data, setPage, isLoading, status }) => {
 
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(false); //Reutilizar
     
-    const { query, setPage } = useFetch(term);
-    const { data, isLoading } = query;
+    //Reutilizar
     const externalRef = useRef<HTMLDivElement>(null);
     const isNearScreen = useNearScreen('100px',externalRef, false);
 
+    //Reutilizar
     const [favorites, dispatch] = useReducer(favoriteReducer,[],init);
-    
-    const debounceHandleNextPage = 
-        useCallback(debounce(() => setPage(page => page + 1), 1000),[setPage]);
 
+    //Reutilizar
+    const debounceHandleNextPage = 
+        useCallback(debounce(() => setPage((page: number) => page + 1), 1000),[setPage]);
+
+    //Reutilizar    
     useEffect(() => {
         //Evitamos que se llame dos veces a la API
         if(isNearScreen) debounceHandleNextPage();
@@ -58,21 +62,21 @@ const Result: React.FC<Props> = ({ term }) => {
         localStorage.setItem('favorites',JSON.stringify(favorites));
     },[favorites]);
 
-    const addToFavorites = (gif: GifData) => {
+    const actionFavorite = (gif: GifData) => {
         
-        dispatch({
-            payload: gif,
-            type: 'ADD'
-        });
+        if(status === 'FAVORITE') {
+            dispatch({
+                payload: gif,
+                type: 'REMOVE'
+            });
+        }else {
+            dispatch({
+                payload: gif,
+                type: 'ADD'
+            });
+        }
+        
     }
-
-    // const removeToFavorites = (id: number) => {
-        
-    //     dispatch({
-    //         payload: id,
-    //         type: 'REMOVE'
-    //     });
-    // }
 
     if(isLoading) return <Loading />;
 
@@ -84,12 +88,12 @@ const Result: React.FC<Props> = ({ term }) => {
                     className='my-masonry-grid'
                     columnClassName='my-masonry-grid_column'>
                     {
-                        data.map(gif => (
+                        data.map((gif: any) => (
                             <Suspense key={gif.id} fallback={<Loader />}>
                                 <Gif 
-                                    gif={gif}
-                                    setIsVisible={setIsVisible}
-                                    addToFavorites={addToFavorites}
+                                    gif={ gif }
+                                    setIsVisible={ setIsVisible }
+                                    actionFavorite={ actionFavorite }
                                 />
                             </Suspense>
                         ))

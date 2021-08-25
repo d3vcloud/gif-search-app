@@ -5,13 +5,19 @@ import Container from 'react-bootstrap/Container';
 import SearchForm from '../../components/SearchForm';
 import Suggestions from '../../components/Suggestions';
 import Result from '../../components/Result';
+import useFetch from '../../hooks/useGifs';
 
-// import './Home.css';
+
 
 const Home = () => {
 
     const [inputValue, setInputValue] = useState<string>('');
     const [termSearch, setTermSearch] = useState<string>('animaciones');
+
+    const { query, setPage } = useFetch(termSearch);
+    const { data, isLoading } = query;
+
+    
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -30,7 +36,11 @@ const Home = () => {
             term={ termSearch }
             handleInputSearch={ setTermSearch }
             handleInputValue={ setInputValue } />
-           <Result term={ termSearch }/>
+           <Result 
+            data={ data }
+            setPage={ setPage }
+            isLoading={ isLoading }
+            status='HOME'/>
        </Container>
     )
 }

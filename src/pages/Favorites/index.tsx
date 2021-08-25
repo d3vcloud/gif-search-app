@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react';
 import { GifData } from "../../types/typeApp";
 
 
+
 const Favorites: React.FC = () => {
 
     const [favorites, setFavorites] = useState<GifData[]>();
@@ -23,9 +24,15 @@ const Favorites: React.FC = () => {
                             ))
                         }
                     </ul>
+                    // <Result 
+                    //     data={ favorites }
+                    //     setPage={ setPage }
+                    //     isLoading={ isLoading }
+                    //     status='FAVORITE'/>
+                    
             }          
         </div>
     )
 }
 
-export default Favorites
+export default Favorites;

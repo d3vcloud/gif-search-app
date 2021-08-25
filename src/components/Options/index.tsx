@@ -12,10 +12,10 @@ type Props = {
   gif: GifData;
   url: string;
   setIsVisible: (state:boolean) => void;
-  addToFavorites: (gif: GifData) => void;
+  actionFavorite: (gif: GifData) => void;
 }
 
-const Options: React.FC<Props> = ({gif ,url, setIsVisible, addToFavorites}) => {
+const Options: React.FC<Props> = ({gif ,url, setIsVisible, actionFavorite}) => {
 
   const handleCopyClick = () => {
     copyTextToClipboard(url)
@@ -41,7 +41,7 @@ const Options: React.FC<Props> = ({gif ,url, setIsVisible, addToFavorites}) => {
             <FontAwesomeIcon icon={faLink} />
         </span>
       </button>
-      <button className='option' onClick={() => addToFavorites(gif)}>
+      <button className='option' onClick={() => actionFavorite(gif)}>
         <span aria-label='add gif to favorites' role='img'>
             <FontAwesomeIcon icon={faHeart} />
         </span>

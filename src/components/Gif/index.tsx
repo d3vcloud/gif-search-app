@@ -8,7 +8,8 @@ import './Gif.css';
 type Props = {
     gif: GifData;
     setIsVisible: (state: boolean) => void;
-    addToFavorites: (gif: GifData) => void;
+    actionFavorite: (gif: GifData) => void;
+    // removeToFavorites?: (id: number) => void;
 }
 
 type Cache = {
@@ -42,7 +43,7 @@ const imgCache: ImgCache = {
     }
 };
 
-const Gif: React.FC<Props> = ({gif, setIsVisible, addToFavorites}) => {
+const Gif: React.FC<Props> = ({gif, setIsVisible, actionFavorite}) => {
   
     const { id, url, title } = gif;
     const newUrl = `https://media.giphy.com/media/${ id }/giphy.gif`;
@@ -57,7 +58,7 @@ const Gif: React.FC<Props> = ({gif, setIsVisible, addToFavorites}) => {
                 gif={gif} 
                 url={newUrl} 
                 setIsVisible={setIsVisible}
-                addToFavorites={addToFavorites}
+                actionFavorite={actionFavorite}
               />
             </div>
             <div className="image">
