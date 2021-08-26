@@ -17,7 +17,8 @@ export const getGifs = async (
             title,
             url: downsized_medium.url,
             height: downsized_medium.height,
-            width: downsized_medium.width
+            width: downsized_medium.width,
+            isFavorite: false
         }
     });
 

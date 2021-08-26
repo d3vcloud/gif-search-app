@@ -52,7 +52,10 @@ const Result = ({ data, setPage, isLoading, pathname }: Props) => {
 
         if(pathname === '/') {
             dispatch({
-                payload: gif,
+                payload: {
+                    ...gif,
+                    isFavorite: true
+                },
                 type: 'ADD' 
             });
         }

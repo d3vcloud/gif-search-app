@@ -22,9 +22,12 @@ export type GifData = {
     url:string;
     width: number;
     height: number;
+    isFavorite: boolean;
 }
 
 export type Favorite = {
     favorites: GifData[];
     dispatch: Dispatch<ActionReducer>;
+    // isFavorite: boolean;
+    // setIsFavorite: (state: boolean) => void;
 }

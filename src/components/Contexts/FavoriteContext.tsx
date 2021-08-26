@@ -3,10 +3,13 @@ import { useEffect, useReducer, createContext } from 'react';
 import { Favorite } from "../../types/typeApp";
 
 import favoriteReducer from '../../reducers/favoriteReducer';
+// import { useState } from 'react';
 
 const initialState = {
     favorites: [],
-    dispatch: () => {}
+    dispatch: () => {},
+    // isFavorite: false,
+    // setIsFavorite: (state: boolean) => {}
 };
 
 export const FavoriteContext = createContext<Favorite>(initialState);
@@ -25,6 +28,7 @@ const init = () => {
 export const FavoriteProvider = ({ children }: Props) => {
 
     const [favorites, dispatch] = useReducer(favoriteReducer,[],init);
+    // const [isFavorite, setIsFavorite] = useState(false);
     
     useEffect(() => {
         localStorage.setItem('favorites',JSON.stringify(favorites));
