@@ -23,12 +23,6 @@ const useFetch = (searchTerm: string) => {
         //Reiniciamos la cantidad a 0 cuando cambia el termino de busqueda o categoria
         setPage(0);
 
-        // setQuery({
-        //     data: [],
-        //     isLoading: true,
-        //     isError: false,
-        // });
-
         getGifs(searchTerm)
             .then(response => {
 

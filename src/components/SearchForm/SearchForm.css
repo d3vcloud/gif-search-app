@@ -4,6 +4,6 @@
 }
 
 .group-text {
-    background: #212529; 
-    color: #fff;
+    background: #212529 !important; 
+    color: #fff !important;
 }

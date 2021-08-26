@@ -1,6 +1,6 @@
 /**
  * 
- * @param text - Represent text to copy
+ * @param text - Representa texto a copiar
  */
 export const copyTextToClipboard = async (text: string) => {
     if(navigator.clipboard){

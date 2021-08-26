@@ -19,7 +19,7 @@ const Navigation = () => {
                     <NavBar />
                     <Switch>
                         <Route exact path='/' component={ Home }/>
-                        <Route exact path='/favorites' component={Favorites} />
+                        <Route exact path='/favorites' component={ Favorites } />
                         <Route component={ NotFound } />
                     </Switch>
                 </>

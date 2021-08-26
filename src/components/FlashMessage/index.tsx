@@ -1,11 +1,10 @@
-import React from 'react';
 import './FlashMessage.css';
 
 type Props = {
     message: string;
 }
 
-const FlashMessage: React.FC<Props> = ({ message }) => {
+const FlashMessage = ({ message }: Props) => {
     
     return (
         <div className='flash-message'>

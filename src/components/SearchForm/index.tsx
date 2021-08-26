@@ -8,7 +8,7 @@ type Props = {
     inputValue: string;
 }
 
-const SearchForm: React.FC<Props> = ({handleSubmit, setInputValue, inputValue}) => {
+const SearchForm = ({handleSubmit, setInputValue, inputValue}: Props) => {
     return (
         <div>
             <Form className="mt-5" onSubmit={ handleSubmit }>

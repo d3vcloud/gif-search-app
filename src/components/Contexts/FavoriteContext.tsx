@@ -1,11 +1,38 @@
-import { createContext } from "react";
-import { GifData } from "../../types/typeApp";
+import { useEffect, useReducer, createContext } from 'react';
 
-export type Favorite = {
-    state: GifData;
-    dispatch:() => void;
+import { Favorite } from "../../types/typeApp";
+
+import favoriteReducer from '../../reducers/favoriteReducer';
+
+const initialState = {
+    favorites: [],
+    dispatch: () => {}
+};
+
+export const FavoriteContext = createContext<Favorite>(initialState);
+
+type Props = {
+    children: JSX.Element
 }
 
-const FavoriteContext = createContext<any>(null);
+const init = () => {
 
-export default FavoriteContext;
+    const favorites = localStorage.getItem('favorites');
+
+    return favorites !== null ? JSON.parse(favorites): [];
+}
+
+export const FavoriteProvider = ({ children }: Props) => {
+
+    const [favorites, dispatch] = useReducer(favoriteReducer,[],init);
+    
+    useEffect(() => {
+        localStorage.setItem('favorites',JSON.stringify(favorites));
+    },[favorites]);
+
+    return (
+        <FavoriteContext.Provider value={{ favorites, dispatch }}>
+            { children }
+        </FavoriteContext.Provider>
+    )
+}

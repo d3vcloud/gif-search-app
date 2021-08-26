@@ -1,9 +1,6 @@
 .container-suggestions {
     display: flex;
     flex-wrap: wrap;
-    /*
-        TODO: mejorar la compatibilidad con otros navegadores
-    */
 }
 
 .container-suggestions span {

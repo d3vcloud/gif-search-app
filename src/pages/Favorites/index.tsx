@@ -3,12 +3,12 @@ import { useContext } from 'react';
 import { Container } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
-import FavoriteContext from '../../components/Contexts/FavoriteContext';
+import { FavoriteContext } from '../../components/Contexts/FavoriteContext';
 import Result from '../../components/Result';
 
 
 
-const Favorites: React.FC = () => {
+const Favorites = () => {
 
     const location = useLocation();
 

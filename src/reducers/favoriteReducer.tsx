@@ -1,6 +1,6 @@
 import { ActionReducer, GifData } from "../types/typeApp";
 
-const favoriteReducer = (state: GifData[], action: ActionReducer) : GifData[]=> {
+const favoriteReducer = (state: GifData[], action: ActionReducer) : GifData[] => {
 
     switch(action.type){
 

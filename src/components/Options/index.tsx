@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faLink } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,7 +5,7 @@ import { copyTextToClipboard } from '../../helpers/copyClipboard';
 
 import { GifData } from '../../types/typeApp';
 
-import "./Options.css";
+import './Options.css';
 
 type Props = {
   gif: GifData;
@@ -16,7 +14,7 @@ type Props = {
   actionFavorite: (gif: GifData) => void;
 }
 
-const Options: React.FC<Props> = ({gif ,url, setIsVisible, actionFavorite }) => {
+const Options = ({gif ,url, setIsVisible, actionFavorite }: Props) => {
 
 
   const handleCopyClick = () => {
@@ -37,7 +35,6 @@ const Options: React.FC<Props> = ({gif ,url, setIsVisible, actionFavorite }) => 
 
   return (
     <>
-      
       <button className='option' onClick={handleCopyClick}>
         <span aria-label='copy link of gif to clipboard' role='img'>
             <FontAwesomeIcon icon={faLink} />

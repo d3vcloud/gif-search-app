@@ -1,7 +1,8 @@
-// import { useEffect, useState } from "react"
-import React from "react";
-import { Badge } from "react-bootstrap"
-import useSuggestions from "../../hooks/useSuggestions";
+import React from 'react';
+
+import { Badge } from 'react-bootstrap'
+
+import useSuggestions from '../../hooks/useSuggestions';
 
 import './Suggestions.css';
 
@@ -13,7 +14,6 @@ type Props = {
 
 const Suggestions = ({ term, handleInputSearch, handleInputValue }: Props) => {
     
-    //TODO: Revisar si no afecta optimizacion
     const { data: suggestions } = useSuggestions(term);
 
     const handleUpdate = (suggestion: string) => {
@@ -22,7 +22,7 @@ const Suggestions = ({ term, handleInputSearch, handleInputValue }: Props) => {
     }
     
     return (
-        <div className="container-suggestions">
+        <div className='container-suggestions'>
             {
                 suggestions.map(suggestion => (
                     <Badge 

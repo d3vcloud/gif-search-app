@@ -1,5 +1,7 @@
-import { Navbar, Container, Nav } from 'react-bootstrap'
 import { Link, NavLink } from 'react-router-dom';
+
+import { Navbar, Container, Nav } from 'react-bootstrap'
+
 import ThemeSetter from '../ThemeSetter';
 
 const NavBar = () => {

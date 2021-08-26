@@ -1,20 +1,20 @@
-import React, { useEffect, useRef, useCallback, Suspense, useState, useContext } from 'react';
+import { useEffect, useRef, useCallback, Suspense, useState, useContext } from 'react';
 
 import Masonry from 'react-masonry-css';
 import debounce from 'just-debounce-it';
+
+import { FavoriteContext } from '../Contexts/FavoriteContext';
+import { GifData } from '../../types/typeApp';
 
 import useNearScreen from '../../hooks/useNearScreen';
 
 import Loading from '../Loading/Loading';
 import Loader from '../Loader/Loader';
-
 import Gif from '../Gif';
 
 import FlashMessage from '../FlashMessage';
 
 import './Result.css';
-import FavoriteContext from '../Contexts/FavoriteContext';
-import { GifData } from '../../types/typeApp';
 
 type Props = {
     data: any;
@@ -30,9 +30,7 @@ const breakpointColumnsObj = {
     500: 1
 };
 
-
-
-const Result: React.FC<Props> = ({ data, setPage, isLoading, pathname }) => {
+const Result = ({ data, setPage, isLoading, pathname }: Props) => {
 
     const [isVisible, setIsVisible] = useState(false);
 
@@ -50,20 +48,25 @@ const Result: React.FC<Props> = ({ data, setPage, isLoading, pathname }) => {
         if(isNearScreen) debounceHandleNextPage();
     },[isNearScreen,debounceHandleNextPage]);
 
-    const actionFavorite = (gif: GifData) => {
-        let type: string;
-        if(pathname === '/') type = 'ADD';
-        else type = 'REMOVE';
+    const actionFavorite = useCallback((gif: GifData) => {
 
-        dispatch({
-            payload:gif,
-            type
-        });
-    }
+        if(pathname === '/') {
+            dispatch({
+                payload: gif,
+                type: 'ADD' 
+            });
+        }
+        else {
+            dispatch({
+                payload: gif,
+                type: 'REMOVE' 
+            });
+        }
+    },[dispatch, pathname]);
 
     if(isLoading) return <Loading />;
 
-    return <>
+    return  <>
                 {isVisible && <FlashMessage message="Enlace copiado!"/>}
                 <Masonry
                     breakpointCols={ breakpointColumnsObj }

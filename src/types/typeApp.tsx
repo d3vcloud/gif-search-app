@@ -1,4 +1,4 @@
-// import React from "react";
+import { Dispatch } from 'react';
 
 export type QueryFetch = {
     data: any[];
@@ -8,7 +8,7 @@ export type QueryFetch = {
 
 export type Theme = {
     isThemeDark: boolean;
-    handleChangeTheme: () => void;
+    setIsThemeDark: (state: boolean) => void;
 }
 
 export type ActionReducer = {
@@ -24,7 +24,7 @@ export type GifData = {
     height: number;
 }
 
-
-// export type FavoriteReducer = {
-//     dispatch: (state: GifData[], action: ActionReducer) => GifData[]
-// }
+export type Favorite = {
+    favorites: GifData[];
+    dispatch: Dispatch<ActionReducer>;
+}

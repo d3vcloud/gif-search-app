@@ -1,7 +1,8 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import FavoriteProvider from './components/Contexts/FavoriteProvider';
-import ThemeProvider from './components/Contexts/ThemeProvider';
+import { FavoriteProvider } from './components/Contexts/FavoriteContext';
+import { ThemeProvider } from './components/Contexts/ThemeContext';
 import Navigation from './components/UI/Navigation/Navigation';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function GifApp() {
   return (
