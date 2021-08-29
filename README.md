@@ -20,8 +20,7 @@ npm install
 ```
 
 El comando instalara las dependencias necesarias para el proyecto.
-
-Luego, renombras el archivo **example.env** a **.env** y copias tu APIKEY en **REACT_APP_API_KEY**
+Luego, renombras el archivo **example.env** a **.env** y copias tu APIKEY en **REACT_APP_API_KEY**.
 Esta API KEY te la brinda GIPHY, previamente debes registrarte en su página.
 
 Por último, ejecutas:
