@@ -2,6 +2,10 @@
 
 GifApp permitirá la búsqueda de gifs, además podrás guardar como favorito el gif de tu agrado y generar un enlace del gif para compartirlo con tus amigos.
 
+
+https://user-images.githubusercontent.com/68721455/131259341-06207698-3bdb-498d-8173-6485bf7f2a84.mp4
+
+
 ## Descripción
 
 Proyecto fue desarrollado usando:
