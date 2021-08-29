@@ -7,40 +7,40 @@ import Options from '../Options';
 import './Gif.css';
 
 type Props = {
-    gif: GifData;
-    setIsVisible: (state: boolean) => void;
-    actionFavorite: (gif: GifData) => void;
+  gif: GifData;
+  setIsVisible: (state: boolean) => void;
+  actionFavorite: (gif: GifData) => void;
 }
 
 type Cache = {
-    [key: string]: boolean | Promise<any>
+  [key: string]: boolean | Promise<any>
 }
 
 type ImgCache = {
-    cache: Cache,
-    read: (src: string) => any;
+  cache: Cache,
+  read: (src: string) => any;
 }
 
 const imgCache: ImgCache = {
-    cache : {},
-    read(src: string) {
-      if (!this.cache[src]) {
-        this.cache[src] = new Promise((resolve) => {
-          const img = new Image();
-          img.onload = () => {
-            this.cache[src] = true;
-            resolve(this.cache[src]);
-          };
-          img.src = src;
-        }).then((img) => {
+  cache : {},
+  read(src: string) {
+    if (!this.cache[src]) {
+      this.cache[src] = new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
           this.cache[src] = true;
-        });
-      }
-      if (this.cache[src] instanceof Promise) {
-        throw this.cache[src];
-      }
-      return this.cache[src];
+          resolve(this.cache[src]);
+        };
+        img.src = src;
+      }).then((img) => {
+        this.cache[src] = true;
+      });
     }
+    if (this.cache[src] instanceof Promise) {
+      throw this.cache[src];
+    }
+    return this.cache[src];
+  }
 };
 
 const Gif = ({ gif, setIsVisible, actionFavorite }: Props) => {

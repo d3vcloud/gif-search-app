@@ -8,11 +8,10 @@ import { GifData } from '../../types/typeApp';
 
 import useNearScreen from '../../hooks/useNearScreen';
 
-import Loading from '../Loading/Loading';
-import Loader from '../Loader/Loader';
-import Gif from '../Gif';
-
 import FlashMessage from '../FlashMessage';
+import Loading from '../Loading/Loading';
+import LazyLoader from '../LazyLoader';
+import Gif from '../Gif';
 
 import './Result.css';
 
@@ -77,7 +76,7 @@ const Result = ({ data, setPage, isLoading, pathname }: Props) => {
                     columnClassName='my-masonry-grid_column'>
                     {
                         data.map((gif: any) => (
-                            <Suspense key={gif.id} fallback={<Loader />}>
+                            <Suspense key={gif.id} fallback={<LazyLoader />}>
                                 <Gif 
                                     gif={ gif }
                                     setIsVisible={ setIsVisible }

@@ -1,0 +1,26 @@
+.content-loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+.lazy-loading {
+    margin-bottom: 10px;
+    padding: 100px 100px;
+    background-color: #ccc;
+    border-radius: 20px;
+    background-image: linear-gradient(90deg, #ddd 0px, #e8e8e8 40px, #ddd 80px) ;
+    background-size: 600px;
+    animation: gif-loading 1.3s infinite linear;
+}
+    
+@keyframes gif-loading {
+    0% {
+        background-position: -32px;
+    }
+    
+    40%, 100% {
+        background-position: 208px;
+    }
+}

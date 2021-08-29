@@ -4,9 +4,8 @@ import { Container } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
 import { FavoriteContext } from '../../components/Contexts/FavoriteContext';
+
 import Result from '../../components/Result';
-
-
 
 const Favorites = () => {
 
